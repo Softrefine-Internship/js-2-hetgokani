@@ -4,12 +4,384 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Staatliches&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 40px;
+        background: radial-gradient(
+            circle at top left,
+            rgba(128, 0, 128, 0.4) 0%,
+            rgba(128, 0, 128, 0) 30%
+          ),
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(75, 0, 130, 0.3) 0%,
+            rgba(75, 0, 130, 0) 20%
+          );
+        background-color: transparent;
+        position: relative;
+      }
+
+      .title {
+        text-align: center;
+      }
+      .contact_heading {
+        font-size: 40px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 550;
+        font-style: normal;
+        color: black;
+        margin: 15px 0 0 0;
+      }
+      .contact_heading_description {
+        font-size: 20px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: rgb(85, 78, 78);
+        margin: 15px 0 0 0;
+      }
+      .form_area {
+        margin: 50px 0 0 0;
+      }
+      form {
+        text-align: left;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin: 0 0 5px 10px;
+        font-size: 15px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        color: #0a0a0a;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        margin: 5px;
+        padding: 10px;
+
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 98%;
+
+        border: 1px solid rgba(199, 199, 199, 0.84);
+        padding: 10px;
+
+        margin-block: 10px;
+        box-shadow: 0px 0px 2px 0px black;
+      }
+
+      .name_row {
+        display: inline-block;
+        width: 99%;
+        gap: 20px;
+        display: flex;
+      }
+
+      .first_name_column,
+      .second_name_column,
+      .phone_num {
+        display: inline-block;
+        width: 295px;
+        vertical-align: top;
+      }
+
+      textarea {
+        height: 100px;
+      }
+      .phone_number_container {
+        position: relative;
+      }
+      .phone_box {
+        margin: 5px;
+        padding: 10px;
+
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 100%;
+
+        border: 1px solid rgba(199, 199, 199, 0.84);
+        padding: 10px;
+
+        margin-block: 10px;
+        box-shadow: 0px 0px 2px 0px black;
+      }
+      .phone_number_container select,
+      .phone_number_container input,
+      .phone_num {
+        width: auto;
+        flex: 1;
+        margin: 10px;
+        padding: 10px;
+
+        border-radius: 4px 0 0 4px;
+        box-shadow: none;
+      }
+      .option {
+        position: absolute;
+        font-size: 16px;
+
+        background-color: #ffffff00;
+        color: #7d7480;
+        border: none;
+      }
+
+      .phone_number_container input {
+        border-radius: 0 4px 4px 0;
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        margin: 20px 0 0 0;
+      }
+
+      .toggle input[type="checkbox"] {
+        display: none;
+      }
+
+      .toggle .toggle-label {
+        margin: 20px 0 0 0;
+        width: 50px;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 15px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .toggle .toggle-label::after {
+        content: "";
+        width: 21px;
+        height: 21px;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+      }
+
+      .toggle input[type="checkbox"]:checked + .toggle-label {
+        background-color: #4a00e0;
+      }
+
+      .toggle input[type="checkbox"]:checked + .toggle-label::after {
+        transform: translateX(25px);
+      }
+
+      .toggle span {
+        margin-left: 10px;
+      }
+
+      .button_letstalk {
+        margin: 30px 0 0 0;
+        width: 100%;
+        background-color: #4a00e0;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 16px;
+      }
+      .button_letstalk:hover {
+        cursor: pointer;
+        color: #4a00e0;
+        background-color: #ffffff;
+      }
+      a {
+        color: #4a00e0;
+        text-decoration: none;
+      }
+      .toggle_text {
+        display: block;
+        margin: 20px 0 5px 10px;
+        font-size: 15px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: #0a0a0a;
+      }
+      .phone_number_container {
+        display: flex;
+        align-items: center;
+      }
+
+      .phone_num {
+        width: 250px;
+
+        padding: 10px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid rgba(199, 199, 199, 0.84);
+        padding: 10px;
+        margin-block: 10px;
+        box-shadow: 0px 0px 2px 0px black;
+      }
+      .phone_number_section {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .country-code {
+        position: absolute;
+        left: 16px;
+        font-size: 14px;
+        color: #555;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .phone_number_section input {
+        padding-left: 50px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 120%;
+        height: 40px;
+        box-shadow: 0px 0px 2px 0px black;
+      }
+      .size {
+        font-size: 13px;
+        margin-left: 2px;
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <section class="container">
+      <header class="title">
+        <h1 class="contact_heading">Contact Sales</h1>
+        <p class="contact_heading_description">
+          Aut magna irure deserunt veniam aliqua magna enim voluptate.
+        </p>
+      </header>
+      <article class="form_area">
+        <form>
+          <div class="name_row">
+            <div class="first_name_column">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first-name" />
+            </div>
+            <div class="second_name_column">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last-name" />
+            </div>
+          </div>
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" />
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" />
+          <label for="email">Phone number</label>
+          <div class="phone_number_section">
+            <div class="country-code">
+              US <i class="fas fa-chevron-down size"></i>
+            </div>
+            <input type="text" id="phone" name="phone_number" />
+          </div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message"></textarea>
+          <div class="toggle">
+            <input type="checkbox" id="agree" name="agree" />
+            <label for="agree" class="toggle-label"></label>
+            <span class="toggle_text">
+              By selecting this, you agree to our</span
+            >
+            <span class="toggle_text">
+              <a href="#">privacy policy.</a>
+            </span>
+          </div>
+          <button class="button_letstalk">Let's talk</button>
+        </form>
+      </article>
+    </section>
+  </body>
   <script>
-    // write javascript here
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("form");
+      const firstName = document.getElementById("first-name");
+      const lastName = document.getElementById("last-name");
+      const company = document.getElementById("company");
+      const email = document.getElementById("email");
+      const message = document.getElementById("message");
+      const agree = document.getElementById("agree");
+      const countryCode = document.getElementById("country-code");
+      const phone = document.getElementById("phone");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let missingFields = [];
+
+        if (!firstName.value.trim()) missingFields.push("First Name");
+        if (!lastName.value.trim()) missingFields.push("Last Name");
+        if (!company.value.trim()) missingFields.push("Company");
+        if (!phone.value.trim()) missingFields.push("Phone Number");
+        if (!email.value.trim()) missingFields.push("Email");
+        if (!message.value.trim()) missingFields.push("Message");
+
+        if (missingFields.length > 0) {
+          alert(
+            "Please fill out the following fields: " + missingFields.join(", ")
+          );
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone.value.trim())) {
+          alert("Please enter a valid 10-digit phone number.");
+          return;
+        }
+
+        if (!agree.checked) {
+          alert("Please agree to the privacy policy.");
+          return;
+        }
+
+        alert("Form submitted successfully!");
+
+        form.reset();
+      });
+    });
   </script>
 </html>

@@ -3,13 +3,192 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>3-Carousel</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+
+      html {
+        font-size: 10px;
+        overflow: hidden;
+      }
+
+      body {
+        background-color: #424242;
+      }
+
+      .button {
+        position: absolute;
+        top: 50%;
+        z-index: 2;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+        padding: 0 10px;
+        border-radius: 50%;
+        background-color: rgba(124, 124, 124, 0.3);
+        border: 3px solid transparent;
+        color: #fff;
+      }
+
+      .button span {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .button:hover {
+        border: 4px solid white;
+      }
+
+      .next {
+        top: 50%;
+        right: 0;
+        margin-right: 20px;
+      }
+
+      .prev {
+        margin-left: 20px;
+      }
+
+      .carousel-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .slides-wrapper {
+        display: flex;
+        height: 100%;
+        width: 100%;
+      }
+
+      .image-slide {
+        transition: all 0.5s ease-in-out;
+        flex: 1 0 100%;
+      }
+
+      .image-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .dots-wrapper {
+        display: inline-block;
+        cursor: pointer;
+        height: 19px;
+        width: 19px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        opacity: 0.3;
+        margin: 0 5px;
+        transition: all 0.3s;
+      }
+
+      .dots-wrapper:hover {
+        opacity: 1;
+      }
+
+      .dots {
+        display: flex;
+        position: absolute;
+        left: 47%;
+        bottom: 0;
+        margin-bottom: 20px;
+        z-index: 3;
+      }
     </style>
   </head>
-  <body></body>
+
+  <body>
+    <section class="carousel-container">
+      <button class="prev button">
+        <span>
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </span>
+      </button>
+      <button class="next button">
+        <span>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </span>
+      </button>
+      <div class="slides-wrapper">
+        <figure class="image-slide">
+          <img src="images/pexels-photo-326055.webp" />
+        </figure>
+        <figure class="image-slide">
+          <img src="images/lion-wild-africa-african.jpg" />
+        </figure>
+        <figure class="image-slide">
+          <img src="images/pexels-photo-983200.jpeg" />
+        </figure>
+        <figure class="image-slide">
+          <img src="images/pexels-photo-417074.jpeg" />
+        </figure>
+        <figure class="image-slide">
+          <img src="images/lion-wild-africa-african.jpg" />
+        </figure>
+      </div>
+      <div class="dots">
+        <div class="dots-wrapper"></div>
+        <div class="dots-wrapper"></div>
+        <div class="dots-wrapper"></div>
+        <div class="dots-wrapper"></div>
+        <div class="dots-wrapper"></div>
+      </div>
+    </section>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
   <script>
-    // write javascript here
+    "use strict";
+    const next = document.querySelector(".next");
+    const prev = document.querySelector(".prev");
+    const images = document.querySelectorAll(".image-slide");
+    const dots = document.querySelectorAll(".dots-wrapper");
+
+    let index = 0;
+    dots[index].style.opacity = 1;
+
+    const moveImage = function () {
+      for (let i = 0; i < images.length; i++) {
+        images[i].style.transform = `translateX(${index * -100}%)`;
+        dots[i].style.opacity = 0.3;
+      }
+      dots[index].style.opacity = 1;
+    };
+
+    const moveNext = function () {
+      index < images.length - 1 ? index++ : (index = 0);
+      moveImage();
+    };
+
+    const movePrev = function () {
+      index == 0 ? (index = images.length - 1) : index--;
+      moveImage();
+    };
+
+    const setIndex = function (num) {
+      index = num;
+      moveImage();
+    };
+
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].addEventListener("click", function () {
+        setIndex(i);
+      });
+    }
+
+    next.addEventListener("click", moveNext);
+    prev.addEventListener("click", movePrev);
   </script>
 </html>

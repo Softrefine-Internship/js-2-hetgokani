@@ -3,13 +3,198 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Modal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        position: relative;
+        height: 100vh;
+      }
+      .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px 20px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        background-color: red;
+        color: white;
+        transition: all 0.2s;
+      }
+      .btn:hover {
+        border: 2px solid red;
+        background-color: white;
+        color: black;
+      }
+      .bgcolor {
+        background-color: rgb(170, 168, 168);
+      }
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        width: 500px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .popup-flexbox {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .danger-symbol {
+        color: red;
+        font-size: 25px;
+        padding: 10px;
+        background-color: rgb(248, 186, 186);
+        border-radius: 50%;
+      }
+      .title {
+        font-size: 22px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+      .desc {
+        font-size: 17px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: rgb(75, 74, 74);
+        margin-top: 10px;
+      }
+      .dangerbox-area {
+        align-self: flex-start;
+      }
+      .close {
+        font-size: 29px;
+        color: gray;
+        position: absolute;
+        top: 14%;
+        left: 95%;
+        transform: translate(-50%, -50%);
+      }
+      .close:hover {
+        color: black;
+        cursor: pointer;
+      }
+      .button-flex {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .cancel {
+        font-size: 18px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        padding: 7px 15px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        background-color: white;
+      }
+      .deactivate {
+        font-size: 18px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        padding: 7px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(255, 0, 0);
+        color: white;
+      }
+      .deactivate:hover {
+        background-color: rgb(252, 30, 30);
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(255, 77, 77, 0.6);
+        transform: translateY(-2px);
+      }
+      .cancel:hover {
+        background-color: rgb(230, 228, 228);
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <button class="btn">Deactivate</button>
+      <section class="popup hidden">
+        <ion-icon class="close" name="close-outline"></ion-icon>
+        <div class="popup-flexbox">
+          <div class="dangerbox-area">
+            <ion-icon class="danger-symbol" name="warning-outline"></ion-icon>
+          </div>
+          <main>
+            <h1 class="title">Deactivate account</h1>
+            <h2 class="desc">
+              Are you sure you want to deactivate your account? All of your data
+              will be permanently removed from our servers forever. This action
+              cannot be undone.
+            </h2>
+          </main>
+        </div>
+        <section class="button-flex">
+          <button class="cancel">Cancel</button>
+          <button class="deactivate">Deactivate</button>
+        </section>
+      </section>
+    </div>
+  </body>
   <script>
-    // write javascript here
+    const popup = document.querySelector(".popup");
+    const container = document.querySelector(".container");
+    const cross = document.querySelector(".close");
+    const cancel = document.querySelector(".cancel");
+    const deactivate = document.querySelector(".deactivate");
+    document.querySelector(".btn").addEventListener("click", function () {
+      popup.classList.remove("hidden");
+      container.classList.add("bgcolor");
+      event.stopPropagation();
+    });
+    function closepopup() {
+      popup.classList.add("hidden");
+      container.classList.remove("bgcolor");
+    }
+    document.querySelector(".close").addEventListener("click", closepopup);
+    document.querySelector(".cancel").addEventListener("click", closepopup);
+    container.addEventListener("click", function (event) {
+      if (!popup.contains(event.target)) {
+        closepopup();
+      }
+    });
+    document
+      .querySelector(".deactivate")
+      .addEventListener("click", function () {
+        alert("Account Deactivated !");
+        closepopup();
+      });
   </script>
 </html>
