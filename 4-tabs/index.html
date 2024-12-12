@@ -44,7 +44,10 @@
         display: flex;
         align-items: center;
       }
-      .title {
+      .title-1,
+      .title-4,
+      .title-3,
+      .title-2 {
         font-size: 23px;
         color: gray;
         font-family: "Roboto", sans-serif;
@@ -54,7 +57,10 @@
         border: none;
         background-color: white;
       }
-      .title:hover {
+      .title-1:hover,
+      .title-4:hover,
+      .title-3:hover,
+      .title-2:hover {
         color: blue;
         box-shadow: inset 0 -2px 0 blue;
         cursor: pointer;
@@ -62,10 +68,10 @@
       .border {
         height: 1px;
         width: 100%;
-        background-color: rgb(49, 49, 49);
+        background-color: rgba(92, 91, 91, 0.096);
       }
       .content {
-        font-size: 20px;
+        font-size: 18px;
         font-family: "Roboto", sans-serif;
         font-weight: 300;
         font-style: normal;
@@ -75,22 +81,44 @@
         background-color: rgba(34, 34, 34, 0.075);
         border-radius: 5px;
       }
+      .dashboard-content,
+      .settings-content,
+      .profile-content,
+      .contacts-content {
+        font-weight: 400;
+        color: black;
+      }
+      .active {
+        color: blue;
+        box-shadow: inset 0 -2px 0 blue;
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <section class="tab">
         <div class="tab-titleflex">
-          <button class="title">Profile</button>
-          <button class="title">Dashboard</button>
-          <button class="title">Settings</button>
-          <button class="title">Contacts</button>
+          <button class="title-1">Profile</button>
+          <button class="title-2">Dashboard</button>
+          <button class="title-3">Settings</button>
+          <button class="title-4">Contacts</button>
         </div>
         <hr class="border" />
         <h1 class="content">
           This is some placeholder content the
+          <span class="profile-content">Profile tab's associated content.</span>
           <span class="dashboard-content"
             >Dashboard tab's associated content.</span
+          >
+          <span class="settings-content"
+            >Settings tab's associated content.</span
+          >
+          <span class="contacts-content"
+            >Contacts tab's associated content.</span
           >
           Clicking another tab will toggle the visibility of this one for the
           next. The tab JavaScript swaps classes to control the content
@@ -101,5 +129,54 @@
   </body>
   <script>
     // write javascript here
+    const profile = document.querySelector(".title-1");
+    const dashboard = document.querySelector(".title-2");
+    const setting = document.querySelector(".title-3");
+    const contact = document.querySelector(".title-4");
+    const profileContent = document.querySelector(".profile-content");
+    const dashboardContent = document.querySelector(".dashboard-content");
+    const settingContent = document.querySelector(".settings-content");
+    const contactContent = document.querySelector(".contacts-content");
+    document.querySelector(".title-1").addEventListener("click", function () {
+      profile.classList.add("active");
+      dashboard.classList.remove("active");
+      setting.classList.remove("active");
+      contact.classList.remove("active");
+      profileContent.classList.remove("hidden");
+      dashboardContent.classList.add("hidden");
+      settingContent.classList.add("hidden");
+      contactContent.classList.add("hidden");
+    });
+    document.querySelector(".title-2").addEventListener("click", function () {
+      profile.classList.remove("active");
+      dashboard.classList.add("active");
+      setting.classList.remove("active");
+      contact.classList.remove("active");
+      profileContent.classList.add("hidden");
+      dashboardContent.classList.remove("hidden");
+      settingContent.classList.add("hidden");
+      contactContent.classList.add("hidden");
+    });
+    document.querySelector(".title-3").addEventListener("click", function () {
+      profile.classList.remove("active");
+      dashboard.classList.remove("active");
+      setting.classList.add("active");
+      contact.classList.remove("active");
+      profileContent.classList.add("hidden");
+      dashboardContent.classList.add("hidden");
+      settingContent.classList.remove("hidden");
+      contactContent.classList.add("hidden");
+    });
+    document.querySelector(".title-4").addEventListener("click", function () {
+      profile.classList.remove("active");
+      dashboard.classList.remove("active");
+      setting.classList.remove("active");
+      contact.classList.add("active");
+      profileContent.classList.add("hidden");
+      dashboardContent.classList.add("hidden");
+      settingContent.classList.add("hidden");
+      contactContent.classList.remove("hidden");
+    });
+    document.querySelector(".title-1").click();
   </script>
 </html>
