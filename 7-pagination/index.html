@@ -3,13 +3,137 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>pagination</title>
     <style>
-      /* write CSS here */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 22px;
+      }
+
+      ul.pages {
+        list-style: none;
+        padding: 0;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      ul.pages li {
+        display: none;
+        padding: 15px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .page-btn {
+        padding: 15px 20px;
+        background: none;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        font-size: 18px;
+        border: none;
+        border-left: 1px solid #ccc;
+      }
+
+      .page-btn:first-child {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+
+      .page-btn:hover {
+        background-color: rgba(78, 120, 235, 0.2);
+        color: #4e78eb;
+      }
+
+      .page-btn.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .page-btn.active {
+        background-color: rgba(78, 120, 235, 0.2);
+        color: #4e78eb;
+      }
     </style>
   </head>
-  <body></body>
-  <script>
-    // write javascript here
-  </script>
+  <body>
+    <ul id="content" class="pages"></ul>
+    <div id="navigation" class="pagination">
+      <button id="previous" class="page-btn disabled" disabled>Previous</button>
+      <div id="pageNumbers"></div>
+      <button id="next" class="page-btn">Next</button>
+    </div>
+    <script>
+      const pages = Array.from(
+        { length: 10 },
+        (_, index) => `Page ${index + 1}`
+      );
+      const content = document.getElementById("content");
+      const previous = document.getElementById("previous");
+      const next = document.getElementById("next");
+      const pageNumbers = document.getElementById("pageNumbers");
+      let currentPage = 1;
+      function renderContent() {
+        content.innerHTML = "";
+        const item = document.createElement("li");
+        item.textContent = pages[currentPage - 1];
+        item.style.display = "block";
+        content.appendChild(item);
+      }
+      function renderPagination() {
+        pageNumbers.innerHTML = "";
+        pages.forEach((_, index) => {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.textContent = index + 1;
+          if (index + 1 === currentPage) {
+            btn.classList.add("active");
+          }
+          btn.addEventListener("click", () => {
+            currentPage = index + 1;
+            updateUI();
+          });
+          pageNumbers.appendChild(btn);
+        });
+      }
+      function updateUI() {
+        renderContent();
+        renderPagination();
+        previous.disabled = currentPage === 1;
+        next.disabled = currentPage === pages.length;
+        previous.classList.toggle("disabled", currentPage === 1);
+        next.classList.toggle("disabled", currentPage === pages.length);
+      }
+      previous.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          updateUI();
+        }
+      });
+      next.addEventListener("click", () => {
+        if (currentPage < pages.length) {
+          currentPage++;
+          updateUI();
+        }
+      });
+      updateUI();
+    </script>
+  </body>
 </html>
